@@ -1,19 +1,20 @@
 class Solution {
 public:
-    int productOfDigits(int num){
-        int product =1;
-
-        while(num>0){
-            product *=num % 10;
-            num /=10;
-        }
-        return product;
-    }
-
     int smallestNumber(int n, int t) {
-        while(productOfDigits(n) % t != 0){
-            n++;}
 
-        return n;
+        while (true) {
+            int temp = n;
+            int product = 1;
+
+            while (temp>0) {
+                product *= temp % 10;
+                temp /= 10;
+            }
+
+            if (product % t == 0)
+                return n;
+
+            n++;
+        }
     }
 };
