@@ -1,22 +1,33 @@
 class Solution {
 public:
     vector<int> productExceptSelf(vector<int>& nums) {
-
+        int zeroCount = 0;
         int n = nums.size();
-        vector<int> res(n);
+        for(auto it: nums) if(it == 0) ++zeroCount;
 
-        int pre = 1;
-        for(int i = 0; i < n; i++){
-            res[i] = pre;
-            pre *= nums[i];
+        if(zeroCount == 1){
+            int curr =1;
+            for(auto it: nums){
+                if(it == 0) continue;
+                curr *= it;
+            }
+            for(auto &it: nums) {
+                if(it == 0){
+                    it = curr;
+                } else it = 0;
+            }
+            return nums;
+        }
+        if(zeroCount > 1){
+            vector<int> ans(n, 0);
+            return ans;
         }
 
-        int suf = 1;
-        for(int i = n - 1; i >= 0; i--){
-            res[i] *= suf;
-            suf *= nums[i];
+        int total = 1;
+        for(auto it:  nums) total *= it;
+        for(auto &it: nums){
+            it = total / it;
         }
-
-        return res;
+        return nums;
     }
 };
