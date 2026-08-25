@@ -1,19 +1,13 @@
 class Solution {
 public:
     int missingMultiple(vector<int>& nums, int k) {
+        set<int>s(nums.begin(), nums.end());
+
         int x = k;
 
-        while(true){
-            bool found = false;
-            for (int num : nums) {
-                if (num == x) {
-                    found = true;
-                    break;
-                }}
-
-            if (found==false)
-                return x;
+        while (s.count(x)) {
             x += k;
         }
+        return x;
     }
 };
