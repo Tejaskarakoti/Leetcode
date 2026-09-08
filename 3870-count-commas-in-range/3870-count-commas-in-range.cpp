@@ -6,7 +6,7 @@ public:
         }
 
         else {
-            return n - 1000 + 1;
+            return n - 999;
         }
        
     }
