@@ -1,16 +1,13 @@
 class Solution {
 public:
     int minRotations(string s) {
-        int sum =min(s[0] -'0',10 -(s[0] -'0'));
-
-        for(int i =0; i<s.size()-1; i++){
-           int a = s[i] -'0';
-            int b = s[i + 1]-'0';
-
-            int diff = abs(b - a);
-            sum += min(diff, 10 - diff);
-
+        int cur = 0, result = 0;
+        for (char c : s) {
+            int digit = c - '0';
+            int d = (digit - cur + 10) % 10;  
+            result += min(d, 10 - d); 
+            cur = digit;
         }
-        return sum;
+        return result;
     }
 };
