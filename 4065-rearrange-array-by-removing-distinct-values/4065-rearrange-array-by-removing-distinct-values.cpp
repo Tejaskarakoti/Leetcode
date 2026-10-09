@@ -1,33 +1,24 @@
 class Solution {
 public:
     vector<int> rearrangeArray(vector<int>& nums) {
-        vector<int> ans;
-        vector<int> sub;
-        unordered_map<int,int> mp;
+        vector<int>mp(101, 0);
 
-        while (!nums.empty()) {
-            mp.clear();
-            sub.clear();
+        for(int x : nums)
+            mp[x]++;
+       vector<int> ans;
 
-            for(int i = 0; i < nums.size(); i++){
-                if (mp.find(nums[i]) == mp.end()){
-                    mp[nums[i]] = i;
-                    sub.push_back(i);
+        bool flag = true;
+        while(flag){
+            flag = false;
+
+            for(int i = 1; i <= 100; i++){
+                if (mp[i] > 0){
+                    ans.push_back(i);
+                    mp[i]--;
+                    flag = true;
                 }
             }
-            vector<int>temp;
-            for (int i :sub) {
-                temp.push_back(nums[i]);
-            }
-
-            sort(temp.begin(), temp.end());
-            ans.insert(ans.end(), temp.begin(), temp.end());
-
-            for (int i = sub.size() - 1; i >= 0; i--) {
-                nums.erase(nums.begin() + sub[i]);
-            }
         }
-
         return ans;
     }
 };
